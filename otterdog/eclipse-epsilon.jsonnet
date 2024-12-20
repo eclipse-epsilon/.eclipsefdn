@@ -1,6 +1,6 @@
 local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
-orgs.newOrg('eclipse-epsilon') {
+orgs.newOrg('modeling.epsilon', 'eclipse-epsilon') {
   settings+: {
     description: "",
     name: "Eclipse Epsilon",
