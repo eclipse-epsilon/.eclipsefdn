@@ -19,6 +19,8 @@ orgs.newOrg('modeling.epsilon', 'eclipse-epsilon') {
     },
   ],
   _repositories+:: [
+    orgs.newRepo('.github') {
+    },
     orgs.newRepo('epsilon') {
       allow_merge_commit: true,
       allow_update_branch: false,
@@ -32,23 +34,22 @@ orgs.newOrg('modeling.epsilon', 'eclipse-epsilon') {
         "model-driven-engineering"
       ],
       web_commit_signoff_required: false,
-      workflows+: {
-        default_workflow_permissions: "write",
-      },
     },
     orgs.newRepo('epsilon-website') {
       allow_merge_commit: true,
       allow_update_branch: false,
       delete_branch_on_merge: false,
+      gh_pages_build_type: "workflow",
       web_commit_signoff_required: false,
-      workflows+: {
-        enabled: true,
-      },
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "main",
+            "playground-monaco"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ],
     },
-  ],
-} + {
-  # snippet added due to 'https://github.com/EclipseFdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
-  _repositories+:: [
-    orgs.newRepo('.github')
   ],
 }
